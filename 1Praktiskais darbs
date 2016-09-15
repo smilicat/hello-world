@@ -1,0 +1,133 @@
+#pragma hdrstop
+#pragma argsused
+
+#include <tchar.h>
+#include <stdio.h>
+#include <iostream.h>
+#include <string>
+/*
+ 1. Praktiskais darbs
+ Darba autors : Kirils Volobujevs
+ Kurss : P2-4
+ Darba uzdevums :
+ "Klases"
+ Izveidot klasi, kas apraksta uzņēmumu. Tam ir
+ jābūt ar minimāli trīs atribūtiem. Viens no parametriem - darbinieku
+ skaits. Pievienot katram atribūtam atbilstošās set (piešķir
+ atribūtam vērtību no sava parametra) un get (atgriež atribūta
+ vērtību) metodes. Pievienot print metodi, kas izvada visu lauku
+ vērtību.
+
+ Pievienojiet konstruktoru, kas inicializē klases atribūtus ar
+ noklusētām vērtībām.
+
+ Izveidot funkciju getTotalSalary, kas kā parametru saņem uzņēmuma
+ vidējo viena darbineika algu, atgriež kopīgo uzņēmuma izmaksāto algu
+ apjomu (vienā mēnesī).
+
+ Norādiet konstantās metodes.
+
+ main funkcijā izveidojiet vienu statisko un vienu dinamisko objektu.
+ Izsauciet visas klases metodes.
+ */
+
+/* --- Klašu defenīcija--- */
+class Company {
+	/* ---- Klases mainīgo skaidrojums ---
+	 staffCount - Personāla skaits
+	 compName - Uzņēmuma nosaukums
+	 staffSalary - Personāla peļņa
+
+	 ------------------------------------- */
+private:
+	int staffCount;
+	string compName;
+	float staffSalary;
+
+public:
+	// Metodes staffCount
+	void setStaffCount(int staffCount) {
+		this->staffCount = staffCount;
+	}
+
+	int getStaffCount() {
+		return staffCount;
+	}
+
+	// Metodes compName
+	void setCompName(string compName) {
+		this->compName = compName;
+	}
+
+	string getCompName() {
+
+		return compName;
+	}
+
+	// Metodes staffSalary
+	void setStaffSalary(float staffSalary) {
+		this->staffSalary = staffSalary;
+	}
+
+	float getStaffSalary() {
+		return staffSalary;
+	}
+
+	// Metode getTotalSalary
+	float getTotalSalary(float avgSal, int emplCount) {
+		return avgSal*emplCount;
+	}
+
+	// Metode PrintInfo
+	void Company::PrintInfo() {
+	cout << "Uznemuma nosaukums ir " << getCompName() << endl;
+	cout << "Uznemuma darbinieku skaits ir :" << getStaffCount()
+			<< endl;
+
+		cout << "Viena darbinieka alga ir :" << getStaffSalary()
+			<< endl;
+		cout << "Uznemuma ienakumi ir " << getTotalSalary
+			(staffSalary, staffCount);
+	}
+};
+
+int main() {
+
+	int rep, staffCount;
+	float staffSalary;
+	string compName;
+
+	Company testOffice; // statiska objekta izveide
+	Company *testOffice1; // dinamiska objekta izveide
+
+	cout << "Ievadiet personala skaitu : ";
+	cin >> staffCount;
+	testOffice.setStaffCount(staffCount);
+	cout << "Ievadiet uznemuma nosaukums : ";
+	cin >> compName;
+	testOffice.setCompName(compName);
+	cout << "Ievadiet viena darbinieka algu : ";
+	cin >> staffSalary;
+	testOffice.setStaffSalary(staffSalary);
+
+	// Dinamisks objekts
+	testOffice1 = new Company;
+	// Dinamiska objekta datu ievade
+	testOffice1->setCompName("Pasaule");
+	testOffice1->setStaffCount(19);
+	testOffice1->setStaffSalary(420.53);
+	// Dinamiska objekta datu izvade
+	cout << endl << "Dinamiska Uznemuma nosaukums ir " <<
+		testOffice1->getCompName()
+		<< endl << "Dinamiska Uznemuma darbinieku skaits ir " <<
+		testOffice1->getStaffCount()
+		<< endl << "Dinamiska Uznemuma vienda darbinieka alga ir " <<
+		testOffice1->getStaffSalary() << endl << endl;
+
+	// Statiska objekta informacijas printesana
+	testOffice.PrintInfo();
+
+
+	cin >> rep;
+	return 0;
+}
