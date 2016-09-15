@@ -42,7 +42,7 @@ class Company {
 private:
 	int staffCount;
 	string compName;
-	float staffSalary;
+	string compAddress;
 
 public:
 	// Metodes staffCount
@@ -50,7 +50,7 @@ public:
 		this->staffCount = staffCount;
 	}
 
-	int getStaffCount() {
+	int getStaffCount() const{
 		return staffCount;
 	}
 
@@ -59,75 +59,87 @@ public:
 		this->compName = compName;
 	}
 
-	string getCompName() {
-
+	string getCompName() const{
 		return compName;
 	}
+	// Metodes compName
+	void setCompAddress(string compAddress) {
+		this->compAddress = compAddress;
+	}
 
-	// Metodes staffSalary
+	string getCompAddress() const{
+		return compAddress;
+	}
+
+/*Metodes staffSalary
 	void setStaffSalary(float staffSalary) {
 		this->staffSalary = staffSalary;
 	}
 
-	float getStaffSalary() {
+	float getStaffSalary() const{
 		return staffSalary;
 	}
-
+*/
 	// Metode getTotalSalary
-	float getTotalSalary(float avgSal, int emplCount) {
-		return avgSal*emplCount;
+	float getTotalSalary(float avgSalary) {
+		return avgSalary*this->staffCount;
 	}
 
 	// Metode PrintInfo
-	void Company::PrintInfo() {
-	cout << "Uznemuma nosaukums ir " << getCompName() << endl;
-	cout << "Uznemuma darbinieku skaits ir :" << getStaffCount()
-			<< endl;
-
-		cout << "Viena darbinieka alga ir :" << getStaffSalary()
-			<< endl;
-		cout << "Uznemuma ienakumi ir " << getTotalSalary
-			(staffSalary, staffCount);
-	}
+	 void PrintInfo();
 };
+	// Funkcija ,kura izvada visu statiska objekta info un getTotalSalary
+	void Company::PrintInfo() {
+		cout << "Uznemuma nosaukums ir " << getCompName() << endl;
+		cout << "Uznemuma darbinieku skaits ir :" << getStaffCount() << endl;
+		cout << "Darba adrese ir :" << getCompAddress() << endl;
+
+	}
 
 int main() {
 
 	int rep, staffCount;
-	float staffSalary;
-	string compName;
+	float AvgSalary = 1000;
+	string compName ,compAddress;
 
 	Company testOffice; // statiska objekta izveide
 	Company *testOffice1; // dinamiska objekta izveide
-
+	//Metode Staff Count
 	cout << "Ievadiet personala skaitu : ";
 	cin >> staffCount;
 	testOffice.setStaffCount(staffCount);
+	//Metode Company Name
 	cout << "Ievadiet uznemuma nosaukums : ";
 	cin >> compName;
 	testOffice.setCompName(compName);
-	cout << "Ievadiet viena darbinieka algu : ";
-	cin >> staffSalary;
-	testOffice.setStaffSalary(staffSalary);
+
+	//Metode Staff Salary
+	cout << "Ievadiet uzņēmuma adresi : ";
+	cin >> compAddress;
+	testOffice.setCompAddress(compAddress);
 
 	// Dinamisks objekts
 	testOffice1 = new Company;
 	// Dinamiska objekta datu ievade
 	testOffice1->setCompName("Pasaule");
 	testOffice1->setStaffCount(19);
-	testOffice1->setStaffSalary(420.53);
+	testOffice1->setCompAddress("Rigas iela 19");
+
 	// Dinamiska objekta datu izvade
 	cout << endl << "Dinamiska Uznemuma nosaukums ir " <<
 		testOffice1->getCompName()
 		<< endl << "Dinamiska Uznemuma darbinieku skaits ir " <<
 		testOffice1->getStaffCount()
-		<< endl << "Dinamiska Uznemuma vienda darbinieka alga ir " <<
-		testOffice1->getStaffSalary() << endl << endl;
+		<< endl << "Dinamiska Uznemuma adrese ir " << testOffice1->getCompAddress() << endl << endl;
 
 	// Statiska objekta informacijas printesana
 	testOffice.PrintInfo();
 
-
+	cout << "Uznemuma ienakumi ir " << testOffice.getTotalSalary(AvgSalary);
 	cin >> rep;
 	return 0;
 }
+
+
+/* ----------------- NO KLASES IZVAKT VISU staffSalary !!!!!!!!!!!!!!!
+						NOMAINIT METODES getStaffSalary setStaffSalaray */;
