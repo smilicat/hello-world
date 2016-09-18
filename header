@@ -1,0 +1,43 @@
+#ifndef COMPANY_H
+#define COMPANY_H
+#include <string>
+using namespace std;
+class Company
+{
+    private:
+        int newEmpCount;
+        string newCompName;
+        string newCompAddress;
+        static int objNum;
+    public:
+        // Constructor
+        Company();
+        //Overloaded Constructor
+        Company(int,string,string);
+        // Deconstructor
+        ~Company();
+
+        //Access Functons
+            // Get Functions
+             int getEmpCount() const;
+                // getEmpCount - return emp Count
+             string getCompAddress() const;
+                // getCompAddress - return company adddress
+             string getCompName() const;
+                // getCompName - return company Name
+        //Mutator Function
+            // Set Functions
+            void setEmpCount(int);
+                // setEmpCount - give Empl count
+            void setCompAddress(string);
+                // setCompAddress - give Company address
+            void setCompName(string);
+                // setCompName - give company Name
+        // More Functions
+            void printInfo() ;
+                // printPIKCInfo - Give info on PICK object
+            float getTotalSalary(float,int);
+
+};
+
+#endif // COMPANY_H
