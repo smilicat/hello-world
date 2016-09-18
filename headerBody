@@ -1,0 +1,65 @@
+#include "Company.h"
+#include <iostream>
+#include <string>
+
+using namespace std;
+// Constructors
+int Company::objNum = 0;
+Company::Company()
+{
+    objNum++;
+    newCompName = "RTK Uznemums";
+    newCompAddress = "Ledmanes iela 1";
+    newEmpCount = 4;
+
+}
+// Overload Constructor
+Company::Company(int empCount,string compName, string compAddress){
+        newEmpCount = empCount;
+        newCompName = compName;
+        newCompAddress = compAddress;
+        objNum++;
+}
+// Deconstructor
+Company::~Company(){
+    objNum--;
+    cout<< endl << "Closed Company : " << getCompName()<<endl;
+}
+// Access Functions
+    //Get Functions
+    int Company::getEmpCount() const{
+        return newEmpCount;
+        // Return EmpCount;
+    }
+    string Company::getCompAddress() const{
+        return newCompAddress;
+        // Retrun CompAddress;
+    }
+    string Company::getCompName() const{
+        return newCompName;
+        // Return compName
+    }
+// Mutator functions
+    //Set Functions
+
+   void Company::setEmpCount(int empCount){
+        newEmpCount = empCount;
+   }
+   void Company::setCompName(string compName){
+        newCompName = compName;
+   }
+   void Company::setCompAddress(string compAddress){
+        newCompAddress = compAddress;
+   }
+// More Functions
+    // Print Functions
+   void Company::printInfo() {
+     cout <<endl<<"Company ID is :" << objNum<< endl << "Company name is : " << getCompName() << endl
+    << "Company Address is :" << getCompAddress() << endl
+    << "Company employee count is : "<< getEmpCount() <<endl;
+   }
+
+   // GetTotalSalary
+    float Company::getTotalSalary(float avgSalary, int month) {
+    return newEmpCount*avgSalary / month;
+}
