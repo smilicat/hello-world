@@ -1,145 +1,46 @@
-#pragma hdrstop
-#pragma argsused
-
-#include <tchar.h>
-#include <stdio.h>
-#include <iostream.h>
+#include <iostream>
 #include <string>
-/*
- 1. Praktiskais darbs
- Darba autors : Kirils Volobujevs
- Kurss : P2-4
- Darba uzdevums :
- "Klases"
- Izveidot klasi, kas apraksta uzņēmumu. Tam ir
- jābūt ar minimāli trīs atribūtiem. Viens no parametriem - darbinieku
- skaits. Pievienot katram atribūtam atbilstošās set (piešķir
- atribūtam vērtību no sava parametra) un get (atgriež atribūta
- vērtību) metodes. Pievienot print metodi, kas izvada visu lauku
- vērtību.
+#include<stdlib.h>
+#include "Company.h"
+using namespace std;
 
- Pievienojiet konstruktoru, kas inicializē klases atribūtus ar
- noklusētām vērtībām.
+int main()
+{
+    int empCount,month;
+    string compAddres;
+    string compName;
+    float avgSalary;
 
- Izveidot funkciju getTotalSalary, kas kā parametru saņem uzņēmuma
- vidējo viena darbineika algu, atgriež kopīgo uzņēmuma izmaksāto algu
- apjomu (vienā mēnesī).
+    cout<<"Input Company name : " << endl;
+        cin >> compName;
+    cout<<"Input Company Address  :" << endl;
+        cin >> compAddres;
+    cout<<"Input Company employee count:" << endl;
+        cin >> empCount;
+    cout <<"Input average employee salary"<< endl;
+        cin >> avgSalary;
+    cout <<"Input month"<< endl;
+        cin >> month;
 
- Norādiet konstantās metodes.
+    //Dynamic Constructor
+    cout << "Number of months: " << month << endl << endl;
+    Company *RTRIT = new Company;
+    RTRIT->setCompName("RTRIT");
+    RTRIT->setCompAddress("Plavu iela 321");
+    RTRIT->setEmpCount(6);
+    RTRIT->printInfo();
+    cout << "Company Totat salary is : " << RTRIT->getTotalSalary( avgSalary,month) << endl;
+    // Object with Overload Constructor
+    Company RTK(empCount,compName,compAddres);
+    RTK.printInfo();
+     cout << "Company Totat salary is : " << RTK.getTotalSalary( avgSalary,month) << endl;
+   // cout << "Company Total salary : "  << RTK.getTotalSalary(avgSalary,month) << endl;
+    // Object with default Constructor
+    Company PIKC;
+    PIKC.printInfo();
+    cout << "Company Totat salary is : " << PIKC.getTotalSalary( avgSalary,month) << endl;
+   // cout << "Company Total salary : "  << PIKC. << endl;
+    delete RTRIT;
 
- main funkcijā izveidojiet vienu statisko un vienu dinamisko objektu.
- Izsauciet visas klases metodes.
- */
-
-/* --- Klašu defenīcija--- */
-class Company {
-	/* ---- Klases mainīgo skaidrojums ---
-	 staffCount - Personāla skaits
-	 compName - Uzņēmuma nosaukums
-	 staffSalary - Personāla peļņa
-
-	 ------------------------------------- */
-private:
-	int staffCount;
-	string compName;
-	string compAddress;
-
-public:
-	// Metodes staffCount
-	void setStaffCount(int staffCount) {
-		this->staffCount = staffCount;
-	}
-
-	int getStaffCount() const{
-		return staffCount;
-	}
-
-	// Metodes compName
-	void setCompName(string compName) {
-		this->compName = compName;
-	}
-
-	string getCompName() const{
-		return compName;
-	}
-	// Metodes compName
-	void setCompAddress(string compAddress) {
-		this->compAddress = compAddress;
-	}
-
-	string getCompAddress() const{
-		return compAddress;
-	}
-
-/*Metodes staffSalary
-	void setStaffSalary(float staffSalary) {
-		this->staffSalary = staffSalary;
-	}
-
-	float getStaffSalary() const{
-		return staffSalary;
-	}
-*/
-	// Metode getTotalSalary
-	float getTotalSalary(float avgSalary) {
-		return avgSalary*this->staffCount;
-	}
-
-	// Metode PrintInfo
-	 void PrintInfo();
-};
-	// Funkcija ,kura izvada visu statiska objekta info un getTotalSalary
-	void Company::PrintInfo() {
-		cout << "Uznemuma nosaukums ir " << getCompName() << endl;
-		cout << "Uznemuma darbinieku skaits ir :" << getStaffCount() << endl;
-		cout << "Darba adrese ir :" << getCompAddress() << endl;
-
-	}
-
-int main() {
-
-	int rep, staffCount;
-	float AvgSalary = 1000;
-	string compName ,compAddress;
-
-	Company testOffice; // statiska objekta izveide
-	Company *testOffice1; // dinamiska objekta izveide
-	//Metode Staff Count
-	cout << "Ievadiet personala skaitu : ";
-	cin >> staffCount;
-	testOffice.setStaffCount(staffCount);
-	//Metode Company Name
-	cout << "Ievadiet uznemuma nosaukums : ";
-	cin >> compName;
-	testOffice.setCompName(compName);
-
-	//Metode Staff Salary
-	cout << "Ievadiet uzņēmuma adresi : ";
-	cin >> compAddress;
-	testOffice.setCompAddress(compAddress);
-
-	// Dinamisks objekts
-	testOffice1 = new Company;
-	// Dinamiska objekta datu ievade
-	testOffice1->setCompName("Pasaule");
-	testOffice1->setStaffCount(19);
-	testOffice1->setCompAddress("Rigas iela 19");
-
-	// Dinamiska objekta datu izvade
-	cout << endl << "Dinamiska Uznemuma nosaukums ir " <<
-		testOffice1->getCompName()
-		<< endl << "Dinamiska Uznemuma darbinieku skaits ir " <<
-		testOffice1->getStaffCount()
-		<< endl << "Dinamiska Uznemuma adrese ir " << testOffice1->getCompAddress() << endl << endl;
-
-	// Statiska objekta informacijas printesana
-	testOffice.PrintInfo();
-
-	cout << "Uznemuma ienakumi ir " << testOffice.getTotalSalary(AvgSalary);
-	cin >> rep;
-	return 0;
+    return 0;
 }
-
-
-/* ----------------- NO KLASES IZVAKT VISU staffSalary !!!!!!!!!!!!!!!
-						NOMAINIT METODES getStaffSalary setStaffSalaray */;
